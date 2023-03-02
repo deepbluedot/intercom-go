@@ -85,7 +85,7 @@ func TestUserAPISave(t *testing.T) {
 	api := UserAPI{httpClient: &http}
 	companyList := CompanyList{
 		Companies: []Company{
-			Company{ID: "5"},
+			{ID: "5"},
 		},
 	}
 	user := User{UserID: "27", Companies: &companyList}

@@ -51,7 +51,7 @@ func TestCompanyListUsersByCompanyID(t *testing.T) {
 
 func TestCompanySave(t *testing.T) {
 	companyService := CompanyService{Repository: TestCompanyAPI{t: t}}
-	company := Company{ID: "46adad3f09126dca", CustomAttributes: map[string]interface{}{"is_cool": true}}
+	company := Company{ID: "46adad3f09126dca"}
 	companyService.Save(&company)
 }
 
@@ -64,24 +64,20 @@ func (t TestCompanyAPI) find(params CompanyIdentifiers) (Company, error) {
 }
 
 func (t TestCompanyAPI) list(params companyListParams) (CompanyList, error) {
-	return CompanyList{Companies: []Company{Company{ID: "46adad3f09126dca", Name: "My Co", CompanyID: "aa123"}}}, nil
+	return CompanyList{Companies: []Company{{ID: "46adad3f09126dca", Name: "My Co", CompanyID: "aa123"}}}, nil
 }
 
 func (t TestCompanyAPI) listUsers(id string, params companyUserListParams) (UserList, error) {
-	return UserList{Users: []User{User{Companies: &CompanyList{Companies: []Company{Company{ID: id, CompanyID: params.CompanyID}}}}}}, nil
+	return UserList{Users: []User{{Companies: &CompanyList{Companies: []Company{{ID: id, CompanyID: params.CompanyID}}}}}}, nil
 }
 
 func (t TestCompanyAPI) scroll(scrollParam string) (CompanyList, error) {
-	return CompanyList{Companies: []Company{Company{ID: "46adad3f09126dca", Name: "My Co", CompanyID: "aa123"}}}, nil
+	return CompanyList{Companies: []Company{{ID: "46adad3f09126dca", Name: "My Co", CompanyID: "aa123"}}}, nil
 }
 
 func (t TestCompanyAPI) save(company *Company) (Company, error) {
 	if company.ID != "46adad3f09126dca" {
 		t.t.Errorf("Company ID was %s, expected 46adad3f09126dca", company.ID)
-	}
-	expectedCAs := map[string]interface{}{"is_cool": true}
-	if company.CustomAttributes["is_cool"] != expectedCAs["is_cool"] {
-		t.t.Errorf("Custom attributes was %v, expected %v", company.CustomAttributes, expectedCAs)
 	}
 	return Company{}, nil
 }

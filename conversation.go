@@ -13,42 +13,47 @@ type ConversationList struct {
 
 // A Conversation represents a conversation between users and admins in Intercom.
 type Conversation struct {
-	ID                  string               `json:"id"`
-	CreatedAt           int64                `json:"created_at"`
-	UpdatedAt           int64                `json:"updated_at"`
-	User                User                 `json:"user"`
-	Assignee            Admin                `json:"assignee"`
-	Open                bool                 `json:"open"`
-	Read                bool                 `json:"read"`
-	ConversationMessage ConversationMessage  `json:"conversation_message"`
-	ConversationParts   ConversationPartList `json:"conversation_parts"`
-	TagList             *TagList             `json:"tags"`
+	ID                string               `json:"id"`
+	CreatedAt         int64                `json:"created_at"`
+	UpdatedAt         int64                `json:"updated_at"`
+	State             string               `json:"state"`
+	Open              bool                 `json:"open"`
+	Read              bool                 `json:"read"`
+	Source            ConversationMessage  `json:"source"`
+	ConversationParts ConversationPartList `json:"conversation_parts"`
+	TagList           *TagList             `json:"tags,omitempty"`
+	Teammates         *AdminList           `json:"teammates,omitempty"`
+	Contacts          *ContactList         `json:"contacts,omitempty"`
 }
 
 // A ConversationMessage is the message that started the conversation rendered for presentation
+// Source
 type ConversationMessage struct {
-	ID      string         `json:"id"`
-	Subject string         `json:"subject"`
-	Body    string         `json:"body"`
-	Author  MessageAddress `json:"author"`
-	URL     string         `json:"url"`
+	ID          string         `json:"id"`
+	Subject     string         `json:"subject"`
+	Body        string         `json:"body"`
+	Author      MessageAddress `json:"author"`
+	Attachments []Attachment   `json:"attachments"`
+	URL         string         `json:"url"`
 }
 
 // A ConversationPartList lists the subsequent Conversation Parts
 type ConversationPartList struct {
 	Parts []ConversationPart `json:"conversation_parts"`
+	Count int64              `json:"total_count"`
 }
 
 // A ConversationPart is a Reply, Note, or Assignment to a Conversation
 type ConversationPart struct {
-	ID         string         `json:"id"`
-	PartType   string         `json:"part_type"`
-	Body       string         `json:"body"`
-	CreatedAt  int64          `json:"created_at"`
-	UpdatedAt  int64          `json:"updated_at"`
-	NotifiedAt int64          `json:"notified_at"`
-	AssignedTo Admin          `json:"assigned_to"`
-	Author     MessageAddress `json:"author"`
+	ID          string         `json:"id"`
+	PartType    string         `json:"part_type"`
+	Body        string         `json:"body"`
+	CreatedAt   int64          `json:"created_at"`
+	UpdatedAt   int64          `json:"updated_at"`
+	NotifiedAt  int64          `json:"notified_at"`
+	AssignedTo  Admin          `json:"assigned_to"`
+	Author      MessageAddress `json:"author"`
+	Attachments []Attachment   `json:"attachments"`
 }
 
 // The state of Conversations to query
@@ -132,7 +137,6 @@ func (c *ConversationService) reply(id string, author MessagePerson, replyType R
 		reply.AdminID = addr.ID
 	} else {
 		reply.IntercomID = addr.ID
-		reply.UserID = addr.UserID
 		reply.Email = addr.Email
 	}
 	return c.Repository.reply(id, &reply)

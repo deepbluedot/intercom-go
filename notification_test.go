@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-var errTest = errors.New("Test Error")
+var errTest = errors.New("test error")
 
 type alwaysErrorReader struct{}
 

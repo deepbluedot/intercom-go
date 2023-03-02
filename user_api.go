@@ -22,9 +22,6 @@ type UserAPI struct {
 	httpClient interfaces.HTTPClient
 }
 
-type requestScroll struct {
-	ScrollParam            string                 `json:"scroll_param,omitempty"`
-}
 type requestUser struct {
 	ID                     string                 `json:"id,omitempty"`
 	Email                  string                 `json:"email,omitempty"`
@@ -54,7 +51,7 @@ func (api UserAPI) getClientForFind(params UserIdentifiers) ([]byte, error) {
 	case params.UserID != "", params.Email != "":
 		return api.httpClient.Get("/users", params)
 	}
-	return nil, errors.New("Missing User Identifier")
+	return nil, errors.New("missing user identifier")
 }
 
 func (api UserAPI) list(params userListParams) (UserList, error) {
@@ -68,17 +65,17 @@ func (api UserAPI) list(params userListParams) (UserList, error) {
 }
 
 func (api UserAPI) scroll(scrollParam string) (UserList, error) {
-       userList := UserList{}
+	userList := UserList{}
 
-       url := "/users/scroll"
-       params := scrollParams{ ScrollParam: scrollParam }
-       data, err := api.httpClient.Get(url, params)
+	url := "/users/scroll"
+	params := scrollParams{ScrollParam: scrollParam}
+	data, err := api.httpClient.Get(url, params)
 
-       if err != nil {
-               return userList, err
-       }
-       err = json.Unmarshal(data, &userList)
-       return userList, err
+	if err != nil {
+		return userList, err
+	}
+	err = json.Unmarshal(data, &userList)
+	return userList, err
 }
 
 func (api UserAPI) save(user *User) (User, error) {

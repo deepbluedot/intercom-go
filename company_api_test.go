@@ -21,9 +21,6 @@ func TestCompanyAPIFind(t *testing.T) {
 	if company.RemoteCreatedAt != 1413218536 {
 		t.Errorf("RemoteCreatedAt was %d, expected %d", company.RemoteCreatedAt, 1413218536)
 	}
-	if company.CustomAttributes["big_company"] != true {
-		t.Errorf("CustomAttributes was %v, expected %v", company.CustomAttributes, map[string]interface{}{"big_company": true})
-	}
 }
 
 func TestCompanyAPIListUsers(t *testing.T) {

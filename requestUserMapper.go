@@ -43,7 +43,6 @@ func (rum RequestUserMapper) MakeUserCompaniesFromCompanies(companies []Company)
 		userCompanies[i] = UserCompany{
 			CompanyID: companies[i].CompanyID,
 			Name:      companies[i].Name,
-			Remove:    companies[i].Remove,
 		}
 	}
 	return userCompanies

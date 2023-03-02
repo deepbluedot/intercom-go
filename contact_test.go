@@ -2,20 +2,11 @@ package intercom
 
 import (
 	"testing"
-
-	"github.com/pborman/uuid"
 )
 
 func TestContactFindByID(t *testing.T) {
 	contact, _ := (&ContactService{Repository: TestContactAPI{t: t}}).FindByID("46adad3f09126dca")
 	if contact.ID != "46adad3f09126dca" {
-		t.Errorf("Contact not found")
-	}
-}
-
-func TestContactFindByUserID(t *testing.T) {
-	contact, _ := (&ContactService{Repository: TestContactAPI{t: t}}).FindByUserID("134d")
-	if contact.UserID != "134d" {
 		t.Errorf("Contact not found")
 	}
 }
@@ -56,7 +47,7 @@ func TestContactUpdate(t *testing.T) {
 
 func TestContactConvert(t *testing.T) {
 	contactService := ContactService{Repository: TestContactAPI{t: t}}
-	contact := Contact{UserID: "aaaa", Email: "some@email.com"}
+	contact := Contact{Email: "some@email.com"}
 	user := User{ID: "abc13", UserID: "c135"}
 	u, _ := contactService.Convert(&contact, &user)
 	if u.Email != contact.Email {
@@ -69,12 +60,12 @@ func TestContactConvert(t *testing.T) {
 
 func TestContactDelete(t *testing.T) {
 	contactService := ContactService{Repository: TestContactAPI{t: t}}
-	contact := Contact{UserID: "aaaa", Email: "some@email.com"}
+	contact := Contact{Email: "some@email.com"}
 	contactService.Delete(&contact)
 }
 
 func TestContactMessageAddress(t *testing.T) {
-	contact := Contact{UserID: "aaaa", Email: "some@email.com"}
+	contact := Contact{Email: "some@email.com"}
 	address := contact.MessageAddress()
 	if address.ID != "" {
 		t.Errorf("Contact address had ID")
@@ -85,9 +76,6 @@ func TestContactMessageAddress(t *testing.T) {
 	if address.Email != "some@email.com" {
 		t.Errorf("Contact address had wrong Email")
 	}
-	if address.UserID != "aaaa" {
-		t.Errorf("Contact address had wrong UserID")
-	}
 }
 
 type TestContactAPI struct {
@@ -95,23 +83,23 @@ type TestContactAPI struct {
 }
 
 func (t TestContactAPI) find(params UserIdentifiers) (Contact, error) {
-	return Contact{ID: params.ID, Email: params.Email, UserID: params.UserID}, nil
+	return Contact{ID: params.ID, Email: params.Email}, nil
 }
 
 func (t TestContactAPI) list(params contactListParams) (ContactList, error) {
-	return ContactList{Contacts: []Contact{Contact{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
+	return ContactList{Contacts: []Contact{{ID: "46adad3f09126dca", Email: "jamie@example.io"}}}, nil
 }
 
 func (t TestContactAPI) scroll(scrollParam string) (ContactList, error) {
-	return ContactList{Contacts: []Contact{Contact{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
+	return ContactList{Contacts: []Contact{{ID: "46adad3f09126dca", Email: "jamie@example.io"}}}, nil
 }
 
 func (t TestContactAPI) create(c *Contact) (Contact, error) {
-	return Contact{ID: c.ID, Email: c.Email, UserID: uuid.New()}, nil
+	return Contact{ID: c.ID, Email: c.Email}, nil
 }
 
 func (t TestContactAPI) update(c *Contact) (Contact, error) {
-	return Contact{ID: c.ID, Email: c.Email, UserID: c.UserID}, nil
+	return Contact{ID: c.ID, Email: c.Email}, nil
 }
 
 func (t TestContactAPI) convert(c *Contact, u *User) (User, error) {

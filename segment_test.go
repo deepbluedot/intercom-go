@@ -22,7 +22,7 @@ type TestSegmentAPI struct {
 }
 
 func (t TestSegmentAPI) list() (SegmentList, error) {
-	return SegmentList{Segments: []Segment{Segment{ID: "de412cad4", Name: "My Tag"}}}, nil
+	return SegmentList{Segments: []Segment{{ID: "de412cad4", Name: "My Tag"}}}, nil
 }
 
 func (t TestSegmentAPI) find(id string) (Segment, error) {

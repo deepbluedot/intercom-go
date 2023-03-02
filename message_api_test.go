@@ -29,7 +29,6 @@ type TestMessageHTTPClient struct {
 	t               *testing.T
 	fixtureFilename string
 	expectedURI     string
-	lastQueryParams interface{}
 }
 
 func (t *TestMessageHTTPClient) Post(uri string, body interface{}) ([]byte, error) {

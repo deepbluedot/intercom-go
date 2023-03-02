@@ -23,7 +23,7 @@ func TestDeleteTag(t *testing.T) {
 
 func TestTaggingUsers(t *testing.T) {
 	tagService := TagService{Repository: TestTagAPI{t: t}}
-	taggingList := TaggingList{Name: "My Tag", Users: []Tagging{Tagging{UserID: "245"}}}
+	taggingList := TaggingList{Name: "My Tag", Users: []Tagging{{UserID: "245"}}}
 	tagService.Tag(&taggingList)
 }
 
@@ -32,7 +32,7 @@ type TestTagAPI struct {
 }
 
 func (t TestTagAPI) list() (TagList, error) {
-	return TagList{Tags: []Tag{Tag{ID: "24", Name: "My Tag"}}}, nil
+	return TagList{Tags: []Tag{{ID: "24", Name: "My Tag"}}}, nil
 }
 
 func (t TestTagAPI) save(tag *Tag) (Tag, error) {

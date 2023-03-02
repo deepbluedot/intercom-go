@@ -55,9 +55,6 @@ func TestUserMessageAddress(t *testing.T) {
 	if address.Email != "some@email.com" {
 		t.Errorf("User address had wrong Email")
 	}
-	if address.UserID != "aaaa" {
-		t.Errorf("User address had wrong UserID")
-	}
 }
 
 type TestUserAPI struct {
@@ -69,11 +66,11 @@ func (t TestUserAPI) find(params UserIdentifiers) (User, error) {
 }
 
 func (t TestUserAPI) list(params userListParams) (UserList, error) {
-	return UserList{Users: []User{User{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
+	return UserList{Users: []User{{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
 }
 
 func (t TestUserAPI) scroll(scrollParam string) (UserList, error) {
-	return UserList{Users: []User{User{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
+	return UserList{Users: []User{{ID: "46adad3f09126dca", Email: "jamie@example.io", UserID: "aa123"}}}, nil
 }
 
 func (t TestUserAPI) save(user *User) (User, error) {

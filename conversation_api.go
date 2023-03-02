@@ -50,7 +50,7 @@ func (api ConversationAPI) reply(id string, reply *Reply) (Conversation, error) 
 	if err != nil {
 		return conversation, err
 	}
-	err = json.Unmarshal(data, &conversation)
+	json.Unmarshal(data, &conversation)
 	return conversation, nil
 }
 

@@ -17,7 +17,7 @@ type Admin struct {
 
 // AdminList represents an object holding list of Admins
 type AdminList struct {
-	Admins []Admin
+	Admins []Admin `json:"admins"`
 }
 
 // AdminService handles interactions with the API through an AdminRepository.

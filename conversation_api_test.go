@@ -15,11 +15,11 @@ func TestConversationFind(t *testing.T) {
 	if convo.TagList == nil || convo.TagList.Tags[0].ID != "12345" {
 		t.Errorf("Conversation tags not retrieved, %s", convo.ID)
 	}
-	if convo.ConversationMessage.ID != "537e564f316c33104c010020" {
-		t.Errorf("Conversation ID not retrieved, %s", convo.ConversationMessage.ID)
+	if convo.Source.ID != "537e564f316c33104c010020" {
+		t.Errorf("Conversation ID not retrieved, %s", convo.Source.ID)
 	}
-	if convo.ConversationMessage.URL != "/the/page/url.html" {
-		t.Errorf("Conversation URL not retrieved, %s", convo.ConversationMessage.URL)
+	if convo.Source.URL != "/the/page/url.html" {
+		t.Errorf("Conversation URL not retrieved, %s", convo.Source.URL)
 	}
 }
 
@@ -84,10 +84,7 @@ func TestConversationListAll(t *testing.T) {
 	if convos.Conversations[0].ID != "147" {
 		t.Errorf("Conversation not retrieved")
 	}
-	if convos.Conversations[0].User.ID != "536e564f316c83104c000020" {
-		t.Errorf("Conversation user not retrieved")
-	}
-	if convos.Conversations[0].ConversationMessage.Author.ID != "25" {
+	if convos.Conversations[0].Source.Author.ID != "25" {
 		t.Errorf("Conversation Message Author not retrieved")
 	}
 	if convos.Conversations[0].ConversationParts.Parts[0].CreatedAt != 1400857494 {
@@ -128,7 +125,6 @@ type TestConversationHTTPClient struct {
 	testFunc        func(t *testing.T, queryParams interface{})
 	fixtureFilename string
 	expectedURI     string
-	lastQueryParams interface{}
 }
 
 func (t *TestConversationHTTPClient) Get(uri string, queryParams interface{}) ([]byte, error) {

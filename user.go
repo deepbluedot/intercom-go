@@ -9,8 +9,8 @@ type UserService struct {
 
 // UserList holds a list of Users and paging information
 type UserList struct {
-	Pages PageParams
-	Users []User
+	Pages       PageParams
+	Users       []User
 	ScrollParam string `json:"scroll_param,omitempty"`
 }
 
@@ -81,7 +81,7 @@ type UserIdentifiers struct {
 
 // UserAvatar represents an avatar for a User.
 type UserAvatar struct {
-	Type string `json:"type,omitempty"`
+	Type     string `json:"type,omitempty"`
 	ImageURL string `json:"image_url,omitempty"`
 }
 
@@ -92,7 +92,7 @@ type userListParams struct {
 }
 
 type scrollParams struct {
-	ScrollParam  string `url:"scroll_param,omitempty"`
+	ScrollParam string `url:"scroll_param,omitempty"`
 }
 
 // FindByID looks up a User by their Intercom ID.
@@ -121,7 +121,7 @@ func (u *UserService) List(params PageParams) (UserList, error) {
 
 // List all Users for App via Scroll API
 func (u *UserService) Scroll(scrollParam string) (UserList, error) {
-       return u.Repository.scroll(scrollParam)
+	return u.Repository.scroll(scrollParam)
 }
 
 // List Users by Segment.
@@ -146,10 +146,10 @@ func (u *UserService) Delete(id string) (User, error) {
 // MessageAddress gets the address for an User in order to message them
 func (u User) MessageAddress() MessageAddress {
 	return MessageAddress{
-		Type:   "user",
-		ID:     u.ID,
-		Email:  u.Email,
-		UserID: u.UserID,
+		Type:  "user",
+		ID:    u.ID,
+		Name:  u.Name,
+		Email: u.Email,
 	}
 }
 

@@ -18,21 +18,19 @@ type CompanyList struct {
 // Not all of the fields are writeable to the API, non-writeable fields are
 // stripped out from the request. Please see the API documentation for details.
 type Company struct {
-	ID               string                 `json:"id,omitempty"`
-	CompanyID        string                 `json:"company_id,omitempty"`
-	Name             string                 `json:"name,omitempty"`
-	RemoteCreatedAt  int64                  `json:"remote_created_at,omitempty"`
-	LastRequestAt    int64                  `json:"last_request_at,omitempty"`
-	CreatedAt        int64                  `json:"created_at,omitempty"`
-	UpdatedAt        int64                  `json:"updated_at,omitempty"`
-	SessionCount     int64                  `json:"session_count,omitempty"`
-	MonthlySpend     int64                  `json:"monthly_spend,omitempty"`
-	UserCount        int64                  `json:"user_count,omitempty"`
-	Tags             *TagList               `json:"tags,omitempty"`
-	Segments         *SegmentList           `json:"segments,omitempty"`
-	Plan             *Plan                  `json:"plan,omitempty"`
-	CustomAttributes map[string]interface{} `json:"custom_attributes,omitempty"`
-	Remove           *bool                  `json:"-"`
+	ID              string `json:"id,omitempty"`
+	CompanyID       string `json:"company_id,omitempty"`
+	Name            string `json:"name,omitempty"`
+	RemoteCreatedAt int64  `json:"remote_created_at,omitempty"`
+	CreatedAt       int64  `json:"created_at,omitempty"`
+	UpdatedAt       int64  `json:"updated_at,omitempty"`
+	Size            int64  `json:"size"`
+	Plan            *Plan  `json:"plan,omitempty"`
+	SessionCount    int64  `json:"session_count,omitempty"`
+	MonthlySpend    int64  `json:"monthly_spend,omitempty"`
+	UserCount       int64  `json:"user_count,omitempty"`
+	Website         string `json:"website"`
+	Industry        string `json:"industry"`
 }
 
 // CompanyIdentifiers to identify a Company using the API

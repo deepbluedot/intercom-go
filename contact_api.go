@@ -35,7 +35,7 @@ func (api ContactAPI) getClientForFind(params UserIdentifiers) ([]byte, error) {
 	case params.UserID != "":
 		return api.httpClient.Get("/contacts", params)
 	}
-	return nil, errors.New("Missing Contact Identifier")
+	return nil, errors.New("missing contact identifier")
 }
 
 func (api ContactAPI) list(params contactListParams) (ContactList, error) {
@@ -49,14 +49,14 @@ func (api ContactAPI) list(params contactListParams) (ContactList, error) {
 }
 
 func (api ContactAPI) scroll(scrollParam string) (ContactList, error) {
-       contactList := ContactList{}
-       params := scrollParams{ ScrollParam: scrollParam }
-       data, err := api.httpClient.Get("/contacts/scroll", params)
-       if err != nil {
-               return contactList, err
-       }
-       err = json.Unmarshal(data, &contactList)
-       return contactList, err
+	contactList := ContactList{}
+	params := scrollParams{ScrollParam: scrollParam}
+	data, err := api.httpClient.Get("/contacts/scroll", params)
+	if err != nil {
+		return contactList, err
+	}
+	err = json.Unmarshal(data, &contactList)
+	return contactList, err
 }
 
 func (api ContactAPI) create(contact *Contact) (Contact, error) {
@@ -108,7 +108,6 @@ func (api ContactAPI) buildRequestContact(contact *Contact) requestUser {
 		ID:                     contact.ID,
 		Email:                  contact.Email,
 		Phone:                  contact.Phone,
-		UserID:                 contact.UserID,
 		Name:                   contact.Name,
 		LastRequestAt:          contact.LastRequestAt,
 		LastSeenIP:             contact.LastSeenIP,

@@ -49,7 +49,7 @@ func (api CompanyAPI) getClientForFind(params CompanyIdentifiers) ([]byte, error
 	case params.CompanyID != "", params.Name != "":
 		return api.httpClient.Get("/companies", params)
 	}
-	return nil, errors.New("Missing Company Identifier")
+	return nil, errors.New("missing company identifier")
 }
 
 func (api CompanyAPI) list(params companyListParams) (CompanyList, error) {
@@ -79,7 +79,7 @@ func (api CompanyAPI) getClientForListUsers(id string, params companyUserListPar
 	case params.CompanyID != "", params.Type == "user":
 		return api.httpClient.Get("/companies", params)
 	}
-	return nil, errors.New("Missing Company Identifier")
+	return nil, errors.New("missing company identifier")
 }
 
 func (api CompanyAPI) scroll(scrollParam string) (CompanyList, error) {
@@ -95,13 +95,12 @@ func (api CompanyAPI) scroll(scrollParam string) (CompanyList, error) {
 
 func (api CompanyAPI) save(company *Company) (Company, error) {
 	requestCompany := requestCompany{
-		ID:               company.ID,
-		Name:             company.Name,
-		CompanyID:        company.CompanyID,
-		RemoteCreatedAt:  company.RemoteCreatedAt,
-		MonthlySpend:     company.MonthlySpend,
-		Plan:             api.getPlanName(company),
-		CustomAttributes: company.CustomAttributes,
+		ID:              company.ID,
+		Name:            company.Name,
+		CompanyID:       company.CompanyID,
+		RemoteCreatedAt: company.RemoteCreatedAt,
+		MonthlySpend:    company.MonthlySpend,
+		Plan:            api.getPlanName(company),
 	}
 
 	savedCompany := Company{}
