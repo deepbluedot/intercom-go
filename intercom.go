@@ -33,8 +33,8 @@ type Client struct {
 	// AppID For Intercom.
 	AppID string
 
-	// APIKey for Intercom's API. See http://app.intercom.io/apps/api_keys.
-	APIKey string
+	// AccessToken for Intercom's API. See http://app.intercom.io/apps/api_keys.
+	AccessToken string
 
 	// HTTP Client used to interact with the API.
 	HTTPClient interfaces.HTTPClient
@@ -60,16 +60,16 @@ func (c *Client) Option(opts ...option) (previous option) {
 }
 
 // NewClient returns a new Intercom API client, configured with the default HTTPClient.
-func NewClient(appID, apiKey string) *Client {
-	intercom := Client{AppID: appID, APIKey: apiKey, baseURI: defaultBaseURI, debug: false, clientVersion: clientVersion}
-	intercom.HTTPClient = interfaces.NewIntercomHTTPClient(intercom.AppID, intercom.APIKey, &intercom.baseURI, &intercom.clientVersion, &intercom.debug)
+func NewClient(appID, token string) *Client {
+	intercom := Client{AppID: appID, AccessToken: token, baseURI: defaultBaseURI, debug: false, clientVersion: clientVersion}
+	intercom.HTTPClient = NewIntercomHTTPClient(intercom.AppID, intercom.AccessToken, &intercom.baseURI, &intercom.clientVersion)
 	intercom.setup()
 	return &intercom
 }
 
 // NewClientWithHTTPClient returns a new Intercom API client, configured with the supplied HTTPClient interface
-func NewClientWithHTTPClient(appID, apiKey string, httpClient interfaces.HTTPClient) *Client {
-	intercom := Client{AppID: appID, APIKey: apiKey, baseURI: defaultBaseURI, debug: false, clientVersion: clientVersion, HTTPClient: httpClient}
+func NewClientWithHTTPClient(appID, token string, httpClient interfaces.HTTPClient) *Client {
+	intercom := Client{AppID: appID, AccessToken: token, baseURI: defaultBaseURI, debug: false, clientVersion: clientVersion, HTTPClient: httpClient}
 	intercom.setup()
 	return &intercom
 }

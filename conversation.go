@@ -91,6 +91,10 @@ func (c *ConversationService) ListByAdmin(admin *Admin, state ConversationListSt
 	return c.Repository.list(params)
 }
 
+func (c *ConversationService) Search(params ConversationSearchParams) (ConversationList, error) {
+	return c.Repository.search(params)
+}
+
 // List Conversations by User
 func (c *ConversationService) ListByUser(user *User, state ConversationListState, pageParams PageParams) (ConversationList, error) {
 	params := ConversationListParams{
@@ -175,4 +179,27 @@ type ConversationListParams struct {
 	Open           *bool  `url:"open,omitempty"`
 	Unread         *bool  `url:"unread,omitempty"`
 	DisplayAs      string `url:"display_as,omitempty"`
+}
+
+type SearchOperatorType uint8
+
+const (
+	OperatorAND SearchOperatorType = iota
+	OperatorOR
+)
+
+type SearchKV struct {
+	Field string `json:"field"`
+	Op    string `json:"operator"`
+	Value string `json:"value"`
+}
+
+type SearchQuery struct {
+	Value    []SearchKV         `json:"value"`
+	Operator SearchOperatorType `json:"operator"`
+}
+
+type ConversationSearchParams struct {
+	Query      SearchQuery `json:"query"`
+	Pagination PageParams  `json:"pagination,omitempty"`
 }

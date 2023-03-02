@@ -13,6 +13,7 @@ type ConversationRepository interface {
 	list(params ConversationListParams) (ConversationList, error)
 	read(id string) (Conversation, error)
 	reply(id string, reply *Reply) (Conversation, error)
+	search(params ConversationSearchParams) (ConversationList, error)
 }
 
 // ConversationAPI implements ConversationRepository
@@ -62,4 +63,15 @@ func (api ConversationAPI) find(id string) (Conversation, error) {
 	}
 	err = json.Unmarshal(data, &conversation)
 	return conversation, err
+}
+
+func (api ConversationAPI) search(params ConversationSearchParams) (ConversationList, error) {
+
+	convoList := ConversationList{}
+	data, err := api.httpClient.Post("/conversations/search", params)
+	if err != nil {
+		return convoList, err
+	}
+	err = json.Unmarshal(data, &convoList)
+	return convoList, err
 }

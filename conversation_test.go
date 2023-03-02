@@ -175,6 +175,11 @@ func (t TestConversationAPI) find(id string) (Conversation, error) {
 	return Conversation{ID: "123"}, nil
 }
 
+func (t TestConversationAPI) search(params ConversationSearchParams) (ConversationList, error) {
+	// no testing
+	return ConversationList{}, nil
+}
+
 func (t TestConversationAPI) read(id string) (Conversation, error) {
 	return Conversation{ID: "123"}, nil
 }
