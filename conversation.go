@@ -181,13 +181,6 @@ type ConversationListParams struct {
 	DisplayAs      string `url:"display_as,omitempty"`
 }
 
-type SearchOperatorType uint8
-
-const (
-	OperatorAND SearchOperatorType = iota
-	OperatorOR
-)
-
 type SearchKV struct {
 	Field string `json:"field"`
 	Op    string `json:"operator"`
@@ -195,8 +188,8 @@ type SearchKV struct {
 }
 
 type SearchQuery struct {
-	Value    []SearchKV         `json:"value"`
-	Operator SearchOperatorType `json:"operator"`
+	Value    []SearchKV `json:"value"`
+	Operator string     `json:"operator"`
 }
 
 type ConversationSearchParams struct {
