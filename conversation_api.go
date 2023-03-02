@@ -57,7 +57,7 @@ func (api ConversationAPI) reply(id string, reply *Reply) (Conversation, error) 
 
 func (api ConversationAPI) find(id string) (Conversation, error) {
 	conversation := Conversation{}
-	data, err := api.httpClient.Get(fmt.Sprintf("/conversations/%s", id), nil)
+	data, err := api.httpClient.Get(fmt.Sprintf("/conversations/%s?display_as=plaintext", id), nil)
 	if err != nil {
 		return conversation, err
 	}
