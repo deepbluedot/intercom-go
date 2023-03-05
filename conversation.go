@@ -19,6 +19,7 @@ type Conversation struct {
 	State             string               `json:"state"`
 	Open              bool                 `json:"open"`
 	Read              bool                 `json:"read"`
+	Priority          string               `json:"priority"`
 	Source            ConversationMessage  `json:"source"`
 	ConversationParts ConversationPartList `json:"conversation_parts"`
 	TagList           *TagList             `json:"tags,omitempty"`
