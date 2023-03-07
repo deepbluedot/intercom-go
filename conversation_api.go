@@ -58,7 +58,7 @@ func (api ConversationAPI) reply(id string, reply *Reply) (Conversation, error) 
 func (api ConversationAPI) find(id string) (Conversation, error) {
 
 	type displayOptions struct {
-		DisplayAs string `json:"display_as"`
+		DisplayAs string `url:"display_as"`
 	}
 
 	opts := displayOptions{
