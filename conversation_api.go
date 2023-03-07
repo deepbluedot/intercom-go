@@ -56,8 +56,16 @@ func (api ConversationAPI) reply(id string, reply *Reply) (Conversation, error) 
 }
 
 func (api ConversationAPI) find(id string) (Conversation, error) {
+
+	type displayOptions struct {
+		DisplayAs string `json:"display_as"`
+	}
+
+	opts := displayOptions{
+		DisplayAs: "plaintext",
+	}
 	conversation := Conversation{}
-	data, err := api.httpClient.Get(fmt.Sprintf("/conversations/%s?display_as=plaintext", id), nil)
+	data, err := api.httpClient.Get(fmt.Sprintf("/conversations/%s", id), opts)
 	if err != nil {
 		return conversation, err
 	}
