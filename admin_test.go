@@ -1,6 +1,9 @@
 package intercom
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 func TestNobodyAdmin(t *testing.T) {
 	admin := Admin{Type: "nobody_admin", ID: "123"}
@@ -37,4 +40,8 @@ type TestAdminAPI struct {
 
 func (t TestAdminAPI) list() (AdminList, error) {
 	return AdminList{Admins: []Admin{{ID: "213"}}}, nil
+}
+
+func (t TestAdminAPI) findByID(id json.Number) (Admin, error) {
+	return Admin{}, nil
 }

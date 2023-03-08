@@ -6,6 +6,6 @@ type Attachment struct {
 	Url         string `json:"url"`
 	ContentType string `json:"content_type"`
 	Size        int64  `json:"filesize"`
-	Width       int64  `json:"width"`
-	Height      int64  `json:"height"`
+	Width       string `json:"width"`
+	Height      string `json:"height"`
 }
