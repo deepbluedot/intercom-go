@@ -48,15 +48,12 @@ type User struct {
 
 // LocationData represents the location for a User.
 type LocationData struct {
-	CityName      string  `json:"city_name,omitempty"`
-	ContinentCode string  `json:"continent_code,omitempty"`
-	CountryName   string  `json:"country_name,omitempty"`
-	Latitude      float64 `json:"latitude,omitempty"`
-	Longitude     float64 `json:"longitude,omitempty"`
-	PostalCode    string  `json:"postal_code,omitempty"`
-	RegionName    string  `json:"region_name,omitempty"`
-	Timezone      string  `json:"timezone,omitempty"`
-	CountryCode   string  `json:"country_code,omitempty"`
+	Type          string `json:"type,omitempty"`
+	Country       string `json:"country,omitempty"`
+	Region        string `json:"region,omitempty"`
+	City          string `json:"city,omitempty"`
+	CountryCode   string `json:"country_code,omitempty"`
+	ContinentCode string `json:continent_code,omitempty"`
 }
 
 // SocialProfile list is a list of SocialProfiles for a User.
@@ -158,7 +155,7 @@ func (u User) String() string {
 }
 
 func (l LocationData) String() string {
-	return fmt.Sprintf("[intercom] location_data { city_name: %s country_name: %s }", l.CityName, l.CountryName)
+	return fmt.Sprintf("[intercom] location_data { city_name: %s country_name: %s }", l.City, l.Country)
 }
 
 func (s SocialProfile) String() string {

@@ -18,16 +18,19 @@ type ContactList struct {
 // Not all of the fields are writeable to the API, non-writeable fields are
 // stripped out from the request. Please see the API documentation for details.
 type Contact struct {
-	ID          string `json:"id,omitempty"`
-	WorkspaceID string `json:"workspace_id"`
-	ExternalID  string `json:"external_id"`
-	Role        string `json:"role"`
-	Email       string `json:"email,omitempty"`
-	Phone       string `json:"phone,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Avatar      string `json:"avatar"`
+	ID          string        `json:"id,omitempty"`
+	WorkspaceID string        `json:"workspace_id"`
+	ExternalID  string        `json:"external_id"`
+	Role        string        `json:"role"`
+	Email       string        `json:"email,omitempty"`
+	Phone       string        `json:"phone,omitempty"`
+	Name        string        `json:"name,omitempty"`
+	Avatar      string        `json:"avatar,omitempty"`
+	OwnerID     string        `json:"owner_id,omitempty"`
+	Companies   *CompanyList  `json:"companies,omitempty"`
+	Location    *LocationData `json:"location_data,omitempty"`
+	Notes       *NoteList     `json:"notes,omitempty"`
 	///////////
-	LocationData           *LocationData          `json:"location_data,omitempty"`
 	LastRequestAt          int64                  `json:"last_request_at,omitempty"`
 	CreatedAt              int64                  `json:"created_at,omitempty"`
 	UpdatedAt              int64                  `json:"updated_at,omitempty"`
@@ -38,7 +41,6 @@ type Contact struct {
 	UserAgentData          string                 `json:"user_agent_data,omitempty"`
 	Tags                   *TagList               `json:"tags,omitempty"`
 	Segments               *SegmentList           `json:"segments,omitempty"`
-	Companies              *CompanyList           `json:"companies,omitempty"`
 	CustomAttributes       map[string]interface{} `json:"custom_attributes,omitempty"`
 	UpdateLastRequestAt    *bool                  `json:"update_last_request_at,omitempty"`
 	NewSession             *bool                  `json:"new_session,omitempty"`
