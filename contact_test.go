@@ -109,3 +109,7 @@ func (t TestContactAPI) convert(c *Contact, u *User) (User, error) {
 func (t TestContactAPI) delete(id string) (Contact, error) {
 	return Contact{ID: id}, nil
 }
+
+func (t TestContactAPI) listNotes(UserIdentifiers) (NoteList, error) {
+	return NoteList{}, nil
+}

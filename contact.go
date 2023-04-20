@@ -68,6 +68,11 @@ func (c *ContactService) findWithIdentifiers(identifiers UserIdentifiers) (Conta
 }
 
 // List all Contacts for App.
+func (c *ContactService) ListNotes(id string) (NoteList, error) {
+	return c.Repository.listNotes(UserIdentifiers{ID: id})
+}
+
+// List all Contacts for App.
 func (c *ContactService) List(params PageParams) (ContactList, error) {
 	return c.Repository.list(contactListParams{PageParams: params})
 }

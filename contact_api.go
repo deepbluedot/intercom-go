@@ -17,6 +17,7 @@ type ContactRepository interface {
 	update(*Contact) (Contact, error)
 	convert(*Contact, *User) (User, error)
 	delete(id string) (Contact, error)
+	listNotes(UserIdentifiers) (NoteList, error)
 }
 
 // ContactAPI implements ContactRepository
@@ -124,4 +125,14 @@ func (api ContactAPI) getCompaniesToSendFromContact(contact *Contact) []UserComp
 		return []UserCompany{}
 	}
 	return RequestUserMapper{}.MakeUserCompaniesFromCompanies(contact.Companies.Companies)
+}
+
+func (api ContactAPI) listNotes(id UserIdentifiers) (NoteList, error) {
+	noteList := NoteList{}
+	data, err := api.httpClient.Get(fmt.Sprintf("/contacts/%s/notes", id.ID), nil)
+	if err != nil {
+		return noteList, err
+	}
+	err = json.Unmarshal(data, &noteList)
+	return noteList, err
 }
