@@ -53,7 +53,7 @@ type LocationData struct {
 	Region        string `json:"region,omitempty"`
 	City          string `json:"city,omitempty"`
 	CountryCode   string `json:"country_code,omitempty"`
-	ContinentCode string `json:continent_code,omitempty"`
+	ContinentCode string `json:"continent_code,omitempty"`
 }
 
 // SocialProfile list is a list of SocialProfiles for a User.
