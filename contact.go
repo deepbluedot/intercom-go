@@ -28,7 +28,7 @@ type Contact struct {
 	Avatar      string        `json:"avatar,omitempty"`
 	OwnerID     int64         `json:"owner_id,omitempty"`
 	Companies   *CompanyList  `json:"companies,omitempty"`
-	Location    *LocationData `json:"location_data,omitempty"`
+	Location    *LocationData `json:"location,omitempty"`
 	Notes       *NoteList     `json:"notes,omitempty"`
 	///////////
 	LastRequestAt          int64                  `json:"last_request_at,omitempty"`
