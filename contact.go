@@ -26,7 +26,7 @@ type Contact struct {
 	Phone       string        `json:"phone,omitempty"`
 	Name        string        `json:"name,omitempty"`
 	Avatar      string        `json:"avatar,omitempty"`
-	OwnerID     string        `json:"owner_id,omitempty"`
+	OwnerID     int64         `json:"owner_id,omitempty"`
 	Companies   *CompanyList  `json:"companies,omitempty"`
 	Location    *LocationData `json:"location_data,omitempty"`
 	Notes       *NoteList     `json:"notes,omitempty"`
