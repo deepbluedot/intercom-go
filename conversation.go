@@ -25,6 +25,8 @@ type Conversation struct {
 	TagList           *TagList             `json:"tags,omitempty"`
 	Teammates         *AdminList           `json:"teammates,omitempty"`
 	Contacts          *ContactList         `json:"contacts,omitempty"`
+	AdminAssigneeID   int64                `json:"admin_assignee_id,omitempty"`
+	TeamAssigneeID    int64                `json:"team_assignee_id,omitempty"`
 }
 
 // A ConversationMessage is the message that started the conversation rendered for presentation
