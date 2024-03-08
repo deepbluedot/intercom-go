@@ -32,12 +32,15 @@ type Conversation struct {
 // A ConversationMessage is the message that started the conversation rendered for presentation
 // Source
 type ConversationMessage struct {
+	Type        string         `json:"type"`
 	ID          string         `json:"id"`
+	DeliveredAs string         `json:"delivered_as"`
 	Subject     string         `json:"subject"`
 	Body        string         `json:"body"`
 	Author      MessageAddress `json:"author"`
 	Attachments []Attachment   `json:"attachments"`
 	URL         string         `json:"url"`
+	Redacted    bool           `json:"redacted"`
 }
 
 // A ConversationPartList lists the subsequent Conversation Parts
