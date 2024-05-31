@@ -197,9 +197,9 @@ type ConversationListParams struct {
 }
 
 type SearchKV struct {
-	Field string `json:"field"`
-	Op    string `json:"operator"`
-	Value string `json:"value"`
+	Field string      `json:"field"`
+	Op    string      `json:"operator"`
+	Value interface{} `json:"value"`
 }
 
 type SearchQuery struct {
