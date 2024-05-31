@@ -35,7 +35,7 @@ type Conversation struct {
 	Contacts          *ContactList         `json:"contacts,omitempty"`
 	AdminAssigneeID   int64                `json:"admin_assignee_id,omitempty"`
 	TeamAssigneeID    int64                `json:"team_assignee_id,omitempty"`
-	Rating            ConversationRating   `json:"conversation_rating,omitempty"`
+	Rating            *ConversationRating  `json:"conversation_rating,omitempty"`
 }
 
 // A ConversationMessage is the message that started the conversation rendered for presentation
