@@ -11,6 +11,14 @@ type ConversationList struct {
 	Conversations []Conversation `json:"conversations"`
 }
 
+type ConversationRating struct {
+	Rating    int64   `json:"rating"`
+	Remark    string  `json:"remark"`
+	CreatedAt int64   `json:"created_at"`
+	Contact   Contact `json:"contact"`
+	Teammate  Admin   `json:"teammate"`
+}
+
 // A Conversation represents a conversation between users and admins in Intercom.
 type Conversation struct {
 	ID                string               `json:"id"`
@@ -27,6 +35,7 @@ type Conversation struct {
 	Contacts          *ContactList         `json:"contacts,omitempty"`
 	AdminAssigneeID   int64                `json:"admin_assignee_id,omitempty"`
 	TeamAssigneeID    int64                `json:"team_assignee_id,omitempty"`
+	Rating            ConversationRating   `json:"conversation_rating,omitempty"`
 }
 
 // A ConversationMessage is the message that started the conversation rendered for presentation
