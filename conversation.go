@@ -21,21 +21,22 @@ type ConversationRating struct {
 
 // A Conversation represents a conversation between users and admins in Intercom.
 type Conversation struct {
-	ID                string               `json:"id"`
-	CreatedAt         int64                `json:"created_at"`
-	UpdatedAt         int64                `json:"updated_at"`
-	State             string               `json:"state"`
-	Open              bool                 `json:"open"`
-	Read              bool                 `json:"read"`
-	Priority          string               `json:"priority"`
-	Source            ConversationMessage  `json:"source"`
-	ConversationParts ConversationPartList `json:"conversation_parts"`
-	TagList           *TagList             `json:"tags,omitempty"`
-	Teammates         *AdminList           `json:"teammates,omitempty"`
-	Contacts          *ContactList         `json:"contacts,omitempty"`
-	AdminAssigneeID   int64                `json:"admin_assignee_id,omitempty"`
-	TeamAssigneeID    int64                `json:"team_assignee_id,omitempty"`
-	Rating            *ConversationRating  `json:"conversation_rating,omitempty"`
+	ID                string                 `json:"id"`
+	CreatedAt         int64                  `json:"created_at"`
+	UpdatedAt         int64                  `json:"updated_at"`
+	State             string                 `json:"state"`
+	Open              bool                   `json:"open"`
+	Read              bool                   `json:"read"`
+	Priority          string                 `json:"priority"`
+	Source            ConversationMessage    `json:"source"`
+	ConversationParts ConversationPartList   `json:"conversation_parts"`
+	TagList           *TagList               `json:"tags,omitempty"`
+	Teammates         *AdminList             `json:"teammates,omitempty"`
+	Contacts          *ContactList           `json:"contacts,omitempty"`
+	AdminAssigneeID   int64                  `json:"admin_assignee_id,omitempty"`
+	TeamAssigneeID    int64                  `json:"team_assignee_id,omitempty"`
+	Rating            *ConversationRating    `json:"conversation_rating,omitempty"`
+	CustomAttributes  map[string]interface{} `json:"custom_attributes,omitempty"`
 }
 
 // A ConversationMessage is the message that started the conversation rendered for presentation
