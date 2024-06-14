@@ -18,22 +18,23 @@ type CompanyList struct {
 // Not all of the fields are writeable to the API, non-writeable fields are
 // stripped out from the request. Please see the API documentation for details.
 type Company struct {
-	Type            string `json:"type,omitempty"`
-	ID              string `json:"id,omitempty"`
-	CompanyID       string `json:"company_id,omitempty"`
-	AppID           string `json:"app_id,omitempty"`
-	Name            string `json:"name,omitempty"`
-	CreatedAt       int64  `json:"created_at,omitempty"`
-	UpdatedAt       int64  `json:"updated_at,omitempty"`
-	MonthlySpend    int64  `json:"monthly_spend,omitempty"`
-	UserCount       int64  `json:"user_count,omitempty"`
-	Url             string `json:"url,omitempty"`
-	RemoteCreatedAt int64  `json:"remote_created_at,omitempty"`
-	Size            int64  `json:"size,omitempty"`
-	Industry        string `json:"industry"`
-	Plan            *Plan  `json:"plan,omitempty"`
-	SessionCount    int64  `json:"session_count,omitempty"`
-	Website         string `json:"website"`
+	Type             string                 `json:"type,omitempty"`
+	ID               string                 `json:"id,omitempty"`
+	CompanyID        string                 `json:"company_id,omitempty"`
+	AppID            string                 `json:"app_id,omitempty"`
+	Name             string                 `json:"name,omitempty"`
+	CreatedAt        int64                  `json:"created_at,omitempty"`
+	UpdatedAt        int64                  `json:"updated_at,omitempty"`
+	MonthlySpend     int64                  `json:"monthly_spend,omitempty"`
+	UserCount        int64                  `json:"user_count,omitempty"`
+	Url              string                 `json:"url,omitempty"`
+	RemoteCreatedAt  int64                  `json:"remote_created_at,omitempty"`
+	Size             int64                  `json:"size,omitempty"`
+	Industry         string                 `json:"industry"`
+	Plan             *Plan                  `json:"plan,omitempty"`
+	SessionCount     int64                  `json:"session_count,omitempty"`
+	Website          string                 `json:"website"`
+	CustomAttributes map[string]interface{} `json:"custom_attributes,omitempty"`
 }
 
 // CompanyIdentifiers to identify a Company using the API
