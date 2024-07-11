@@ -37,15 +37,18 @@ func NewNotification(r io.Reader) (*Notification, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	switch notification.Topic {
 	case "conversation_part.tag.created":
-		c := &Conversation{}
-		json.Unmarshal(notification.RawData.Item, c)
-		notification.Conversation = c
 
-		t := &Tag{}
-		json.Unmarshal(notification.RawData.Item, t)
-		notification.Tag = t
+		var binder struct {
+			Conversation Conversation `json:"conversation,omitempty"`
+			Tag          Tag          `json:"tag,omitempty"`
+		}
+		json.Unmarshal(notification.RawData.Item, &binder)
+
+		notification.Conversation = &binder.Conversation
+		notification.Tag = &binder.Tag
 
 	case "conversation.admin.assigned",
 		"conversation.admin.closed",
