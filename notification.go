@@ -38,17 +38,32 @@ func NewNotification(r io.Reader) (*Notification, error) {
 		return nil, err
 	}
 	switch notification.Topic {
-	case "conversation.user.created",
-		"conversation.user.replied",
-		"conversation.admin.replied",
-		"conversation.admin.single.created",
-		"conversation.admin.assigned",
-		"conversation.admin.noted",
-		"conversation.admin.closed",
-		"conversation.admin.opened":
+	case "conversation_part.tag.created":
 		c := &Conversation{}
 		json.Unmarshal(notification.RawData.Item, c)
 		notification.Conversation = c
+
+		t := &Tag{}
+		json.Unmarshal(notification.RawData.Item, t)
+		notification.Tag = t
+
+	case "conversation.admin.assigned",
+		"conversation.admin.closed",
+		"conversation.admin.noted",
+		"conversation.admin.open.assigned",
+		"conversation.admin.opened",
+		"conversation.admin.replied",
+		"conversation.admin.single.created",
+		"conversation.admin.snoozed",
+		"conversation.admin.unsnoozed",
+		"conversation.priority.updated",
+		"conversation.rating.added",
+		"conversation.user.created",
+		"conversation.user.replied":
+		c := &Conversation{}
+		json.Unmarshal(notification.RawData.Item, c)
+		notification.Conversation = c
+
 	case "user.created",
 		"user.deleted",
 		"user.unsubscribed",
@@ -56,15 +71,18 @@ func NewNotification(r io.Reader) (*Notification, error) {
 		u := &User{}
 		json.Unmarshal(notification.RawData.Item, u)
 		notification.User = u
+
 	case "user.tag.created",
 		"user.tag.deleted":
 		t := &Tag{}
 		json.Unmarshal(notification.RawData.Item, t)
 		notification.Tag = t
+
 	case "company.created":
 		c := &Company{}
 		json.Unmarshal(notification.RawData.Item, c)
 		notification.Company = c
+
 	case "event.created":
 		e := &Event{}
 		json.Unmarshal(notification.RawData.Item, e)
