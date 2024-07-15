@@ -67,6 +67,12 @@ func NewNotification(r io.Reader) (*Notification, error) {
 		json.Unmarshal(notification.RawData.Item, c)
 		notification.Conversation = c
 
+	case "contact.user.updated",
+		"contact.lead.updated":
+		u := &User{}
+		json.Unmarshal(notification.RawData.Item, u)
+		notification.User = u
+
 	case "user.created",
 		"user.deleted",
 		"user.unsubscribed",
