@@ -31,19 +31,21 @@ type Contact struct {
 	Location    *LocationData `json:"location,omitempty"`
 	Notes       *NoteList     `json:"notes,omitempty"`
 	///////////
-	LastRequestAt          int64                  `json:"last_request_at,omitempty"`
-	CreatedAt              int64                  `json:"created_at,omitempty"`
-	UpdatedAt              int64                  `json:"updated_at,omitempty"`
-	SessionCount           int64                  `json:"session_count,omitempty"`
-	LastSeenIP             string                 `json:"last_seen_ip,omitempty"`
-	SocialProfiles         *SocialProfileList     `json:"social_profiles,omitempty"`
-	UnsubscribedFromEmails *bool                  `json:"unsubscribed_from_emails,omitempty"`
-	UserAgentData          string                 `json:"user_agent_data,omitempty"`
-	Tags                   *TagList               `json:"tags,omitempty"`
-	Segments               *SegmentList           `json:"segments,omitempty"`
-	CustomAttributes       map[string]interface{} `json:"custom_attributes,omitempty"`
-	UpdateLastRequestAt    *bool                  `json:"update_last_request_at,omitempty"`
-	NewSession             *bool                  `json:"new_session,omitempty"`
+	LastRequestAt          int64              `json:"last_request_at,omitempty"`
+	CreatedAt              int64              `json:"created_at,omitempty"`
+	UpdatedAt              int64              `json:"updated_at,omitempty"`
+	SessionCount           int64              `json:"session_count,omitempty"`
+	LastSeenIP             string             `json:"last_seen_ip,omitempty"`
+	SocialProfiles         *SocialProfileList `json:"social_profiles,omitempty"`
+	UnsubscribedFromEmails *bool              `json:"unsubscribed_from_emails,omitempty"`
+	UserAgentData          string             `json:"user_agent_data,omitempty"`
+	Tags                   *struct {
+		Data []Tag `json:"data,omitempty"`
+	} `json:"tags,omitempty"`
+	Segments            *SegmentList           `json:"segments,omitempty"`
+	CustomAttributes    map[string]interface{} `json:"custom_attributes,omitempty"`
+	UpdateLastRequestAt *bool                  `json:"update_last_request_at,omitempty"`
+	NewSession          *bool                  `json:"new_session,omitempty"`
 }
 
 type contactListParams struct {
