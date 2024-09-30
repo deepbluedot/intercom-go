@@ -15,6 +15,7 @@ type HTTPClient interface {
 	Get(string, interface{}) ([]byte, error)
 	Post(string, interface{}) ([]byte, error)
 	Patch(string, interface{}) ([]byte, error)
+	Put(string, interface{}) ([]byte, error)
 	Delete(string, interface{}) ([]byte, error)
 }
 
@@ -71,6 +72,10 @@ func addQueryParams(req *http.Request, params interface{}) {
 
 func (c IntercomHTTPClient) Patch(url string, body interface{}) ([]byte, error) {
 	return c.postOrPatch("PATCH", url, body)
+}
+
+func (c IntercomHTTPClient) Put(url string, body interface{}) ([]byte, error) {
+	return c.postOrPatch("PUT", url, body)
 }
 
 func (c IntercomHTTPClient) Post(url string, body interface{}) ([]byte, error) {

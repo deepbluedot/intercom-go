@@ -3,5 +3,3 @@ github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-querystring v1.1.0 h1:AnCroh3fv4ZBgVIf1Iwtovgjaw/GiKJo8M8yD/fhyJ8=
 github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17icRSOU623lUBU=
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
-gopkg.in/intercom/intercom-go.v2 v2.0.0-20210504094731-2bd1af0ce4b2 h1:p8or2gHeDG15uEO5FLiyPBRoxstdNBgyYhg743yz+R8=
-gopkg.in/intercom/intercom-go.v2 v2.0.0-20210504094731-2bd1af0ce4b2/go.mod h1:k7NO4r+VF6eXR9VY+U32m99wFGNudcwcXCeFSKrMwes=

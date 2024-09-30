@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"gopkg.in/intercom/intercom-go.v2/interfaces"
+	"github.com/deepbluedot/intercom-go/interfaces"
 )
 
 // ConversationRepository defines the interface for working with Conversations through the API.
@@ -14,6 +14,7 @@ type ConversationRepository interface {
 	read(id string) (Conversation, error)
 	reply(id string, reply *Reply) (Conversation, error)
 	search(params ConversationSearchParams) (ConversationList, error)
+	update(id string, params ConversationUpdateParams) error
 }
 
 // ConversationAPI implements ConversationRepository
@@ -82,4 +83,14 @@ func (api ConversationAPI) search(params ConversationSearchParams) (Conversation
 	}
 	err = json.Unmarshal(data, &convoList)
 	return convoList, err
+}
+
+func (api ConversationAPI) update(id string, params ConversationUpdateParams) error {
+
+	_, err := api.httpClient.Put(fmt.Sprintf("/conversations/%s", id), params)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

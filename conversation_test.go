@@ -91,6 +91,17 @@ func TestAssignConversation(t *testing.T) {
 	conversationService.Assign("123", &Admin{ID: "abc123"}, &Admin{ID: "def789"})
 }
 
+func TestUpdateConversationCustomAttributes(t *testing.T) {
+	testAPI := TestConversationAPI{t: t}
+	testAPI.testFunc = func(t *testing.T, param interface{}) {
+		if len(param.(ConversationUpdateParams).CustomAttributes) == 0 {
+			t.Errorf("invalid param")
+		}
+	}
+	conversationService := ConversationService{Repository: testAPI}
+	conversationService.Update("123", ConversationUpdateParams{CustomAttributes: map[string]interface{}{"Theme": "test theme"}})
+}
+
 func TestListAllConversations(t *testing.T) {
 	conversationService := ConversationService{Repository: TestConversationAPI{t: t}}
 	list, _ := conversationService.ListAll(PageParams{})
@@ -189,4 +200,12 @@ func (t TestConversationAPI) reply(id string, reply *Reply) (Conversation, error
 		t.testFunc(t.t, reply)
 	}
 	return Conversation{ID: "123"}, nil
+}
+
+func (t TestConversationAPI) update(id string, param ConversationUpdateParams) error {
+
+	if t.testFunc != nil {
+		t.testFunc(t.t, param)
+	}
+	return nil
 }

@@ -185,6 +185,11 @@ func (c *ConversationService) Close(id string, closer *Admin) (Conversation, err
 	return c.reply(id, closer, CONVERSATION_CLOSE, "", nil)
 }
 
+// Update a Conversation
+func (c *ConversationService) Update(id string, param ConversationUpdateParams) error {
+	return c.Repository.update(id, param)
+}
+
 type ConversationListParams struct {
 	PageParams
 	Type           string `url:"type,omitempty"`
@@ -211,4 +216,8 @@ type SearchQuery struct {
 type ConversationSearchParams struct {
 	Query      SearchQuery `json:"query"`
 	Pagination PageParams  `json:"pagination,omitempty"`
+}
+
+type ConversationUpdateParams struct {
+	CustomAttributes map[string]interface{} `json:"custom_attributes,omitempty"`
 }

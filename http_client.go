@@ -61,6 +61,10 @@ func (c IntercomHTTPClient) Patch(url string, body interface{}) ([]byte, error) 
 	return c.postOrPatch("PATCH", url, body)
 }
 
+func (c IntercomHTTPClient) Put(url string, body interface{}) ([]byte, error) {
+	return c.postOrPatch("PUT", url, body)
+}
+
 func (c IntercomHTTPClient) Post(url string, body interface{}) ([]byte, error) {
 	return c.postOrPatch("POST", url, body)
 }
